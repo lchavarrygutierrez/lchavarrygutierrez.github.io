@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Leonardo Chavarry — Finance & Technology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #162240;
+    --gold: #b8955a;
+    --gold-light: #d4b07a;
+    --cream: #f8f5f0;
+    --text: #1a1a2e;
+    --text-muted: #5a6075;
+    --border: rgba(10,22,40,0.12);
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(248,245,240,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--navy);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 4rem;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-lines {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image:
+      repeating-linear-gradient(90deg, #fff 0px, #fff 1px, transparent 1px, transparent 80px),
+      repeating-linear-gradient(0deg, #fff 0px, #fff 1px, transparent 1px, transparent 80px);
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 760px;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(184,149,90,0.4);
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 500;
+    line-height: 1.05;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-name span { color: var(--gold); }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    padding: 14px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+    border-radius: 2px;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); }
+
+  .btn-outline {
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 14px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+    border-radius: 2px;
+  }
+
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* SECTION BASE */
+  section { padding: 6rem 4rem; }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1.15;
+    margin-bottom: 3rem;
+  }
+
+  .inner { max-width: 1080px; margin: 0 auto; }
+
+  /* ABOUT */
+  #about { background: var(--white); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--text-muted);
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+    line-height: 1.85;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    align-self: start;
+  }
+
+  .stat-card {
+    background: var(--white);
+    padding: 1.75rem;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-label {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--cream); }
+
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2.5rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .exp-item:last-child { border-bottom: 1px solid var(--border); }
+
+  .exp-meta { padding-top: 4px; }
+
+  .exp-date {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+  }
+
+  .exp-company {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .exp-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.935rem;
+    color: var(--text-muted);
+    padding-left: 1.2rem;
+    position: relative;
+    line-height: 1.65;
+  }
+
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+
+  /* PROJECTS */
+  #projects { background: var(--navy); }
+
+  #projects .section-title { color: #ffffff; }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 2rem;
+    transition: border-color 0.25s, background 0.25s;
+  }
+
+  .project-card:hover {
+    border-color: rgba(184,149,90,0.5);
+    background: rgba(255,255,255,0.07);
+  }
+
+  .project-tag {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+    line-height: 1.35;
+  }
+
+  .project-desc {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tech-tag {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+
+  /* SKILLS */
+  #skills { background: var(--white); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+  }
+
+  .skill-group-title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    font-size: 0.82rem;
+    color: var(--navy);
+    background: var(--cream);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 2px;
+    font-weight: 400;
+  }
+
+  /* CONTACT */
+  #contact { background: var(--cream); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-text {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.85;
+    margin-bottom: 2rem;
+  }
+
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-link:hover { color: var(--gold); }
+
+  .contact-link-icon {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: var(--navy);
+    flex-shrink: 0;
+    transition: border-color 0.2s;
+  }
+
+  .contact-link:hover .contact-link-icon { border-color: var(--gold); color: var(--gold); }
+
+  .edu-block {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+  }
+
+  .edu-item { margin-bottom: 1.75rem; }
+  .edu-item:last-child { margin-bottom: 0; }
+
+  .edu-school {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 0.25rem;
+  }
+
+  .edu-degree {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 0.15rem;
+  }
+
+  .edu-detail {
+    font-size: 0.8rem;
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-tag  { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+  .hero-name { animation: fadeUp 0.7s ease both; animation-delay: 0.25s; }
+  .hero-subtitle { animation: fadeUp 0.7s ease both; animation-delay: 0.4s; }
+  .hero-ctas { animation: fadeUp 0.7s ease both; animation-delay: 0.55s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    section { padding: 4rem 1.5rem; }
+    #hero { padding: 6rem 1.5rem 4rem; }
+    nav { padding: 0 1.5rem; }
+    .nav-links { gap: 1.25rem; }
+    .about-grid, .contact-grid, .exp-item { grid-template-columns: 1fr; gap: 1.5rem; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">LC</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Finance &amp; Technology</span>
+    <h1 class="hero-name">Leonardo<br /><span>Chavarry</span></h1>
+    <p class="hero-subtitle">Computer Science &amp; Economics graduate from Colgate University. Building at the intersection of financial systems, product strategy, and emerging technology.</p>
+    <div class="hero-ctas">
+      <a href="#experience" class="btn-primary">View Experience</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="inner">
+    <p class="section-label">About</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2 class="section-title">Finance mind.<br />Technical edge.</h2>
+        <p>I'm a Computer Science and Economics graduate from Colgate University (GPA 3.60, Honors) with experience spanning product management, financial analysis, and full-stack development.</p>
+        <p>My work sits at the crossroads of fintech and product — from driving $500K+ in cost savings at FactSet through data automation, to founding a nonprofit that helped 200+ small businesses digitize their operations.</p>
+        <p>I'm fluent in English, Spanish, and French, and bring a global perspective to every problem I work on. I'm particularly drawn to roles where rigorous financial thinking meets modern product execution.</p>
+        <div style="margin-top:2rem;">
+          <a href="mailto:lchavarrygutierrez@colgate.edu" class="btn-primary" style="background:var(--navy); color:#fff;">Download Resume</a>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">3.60</div>
+          <div class="stat-label">GPA — Colgate University</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">200+</div>
+          <div class="stat-label">SMEs supported via Mi Pyme Digital</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">$500K</div>
+          <div class="stat-label">Vendor cost savings at FactSet</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Languages spoken</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="inner">
+    <p class="section-label">Experience</p>
+    <h2 class="section-title">Where I've worked</h2>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-date">Jun – Aug 2025</div>
+          <div class="exp-company">FactSet · New York, NY</div>
+        </div>
+        <div>
+          <div class="exp-role">Product Management Intern</div>
+          <ul class="exp-bullets">
+            <li>Identified $500K+ in vendor cost savings by automating company reference data, reducing FactSet's $10M+ external data spend</li>
+            <li>Performed data due diligence on internal vs. vendor datasets for 5,000+ U.S. companies, identifying coverage gaps and informing automation priorities</li>
+            <li>Managed build-vs-buy decisions by aligning product and engineering teams on entity and URL data integrity</li>
+            <li>Designed and deployed an AI RAG agent prototype using LLM feedback loops to improve search retrieval accuracy</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-date">Jun – Aug 2024</div>
+          <div class="exp-company">Johns Hopkins · Carlisle, PA</div>
+        </div>
+        <div>
+          <div class="exp-role">Technology Consultant Intern</div>
+          <ul class="exp-bullets">
+            <li>Deployed Office 365 and cloud automation tools for 500+ users, reducing support-related downtime by 30%</li>
+            <li>Led stakeholder requirement gathering and coordinated cross-functional teams on documentation and training protocols</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-date">Sep 2023 – May 2026</div>
+          <div class="exp-company">Colgate Investment Group</div>
+        </div>
+        <div>
+          <div class="exp-role">Analyst</div>
+          <ul class="exp-bullets">
+            <li>Conducted DCF modeling, financial statement analysis, and strategic research to forecast long-term performance and relative valuation</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-date">Jan 2020 – Present</div>
+          <div class="exp-company">Mi Pyme Digital</div>
+        </div>
+        <div>
+          <div class="exp-role">President &amp; Founder</div>
+          <ul class="exp-bullets">
+            <li>Founded and scaled a nonprofit consultancy supporting 200+ SMEs on digital strategy, driving post-COVID recovery through technology adoption</li>
+            <li>Delivered websites, automation tools, and social media systems that achieved an average 15% annual revenue growth across the portfolio</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="inner">
+    <p class="section-label">Projects</p>
+    <h2 class="section-title">Selected work</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-tag">Senior Honors Thesis</div>
+        <div class="project-title">Modeling Financial Networks for Systemic Risk</div>
+        <p class="project-desc">Built a Monte Carlo framework to model DeFi liquidation risk using empirical ETH price data and oracle mispricing (TWAP vs. close). Extended to multi-loan portfolios, demonstrating correlated liquidation risk under shared collateral.</p>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Monte Carlo</span>
+          <span class="tech-tag">DeFi</span>
+          <span class="tech-tag">Risk Modeling</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-tag">Personal Project</div>
+        <div class="project-title">Personal Finance Tracker</div>
+        <p class="project-desc">Designed and launched a Python application that translates user pain points in manual expense tracking into an intuitive product — automating categorization, spend visualization, and savings insights.</p>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Pandas</span>
+          <span class="tech-tag">Data Viz</span>
+          <span class="tech-tag">CSV</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-tag">Internship · FactSet</div>
+        <div class="project-title">AI RAG Search Agent</div>
+        <p class="project-desc">Designed and deployed a prototype AI retrieval-augmented generation agent that dynamically rewrites search queries using LLM feedback loops, improving retrieval accuracy for internal product workflows.</p>
+        <div class="project-tech">
+          <span class="tech-tag">RAG</span>
+          <span class="tech-tag">LLM</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Product</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="inner">
+    <p class="section-label">Skills</p>
+    <h2 class="section-title">What I bring</h2>
+    <div class="skills-grid">
+      <div>
+        <div class="skill-group-title">Technical</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">HTML / CSS</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">LaTeX</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">SAP S/4HANA</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-title">Product &amp; Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Agile</span>
+          <span class="skill-tag">Jira</span>
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">Excel</span>
+          <span class="skill-tag">Roadmap Planning</span>
+          <span class="skill-tag">Stakeholder Mgmt</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-title">Finance &amp; Modeling</div>
+        <div class="skill-tags">
+          <span class="skill-tag">DCF Modeling</span>
+          <span class="skill-tag">Financial Statement Analysis</span>
+          <span class="skill-tag">Valuation</span>
+          <span class="skill-tag">Wall Street Prep</span>
+          <span class="skill-tag">Training the Street</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">English (Native)</span>
+          <span class="skill-tag">Spanish (Native)</span>
+          <span class="skill-tag">French (Fluent)</span>
+          <span class="skill-tag">German (Basic)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <p class="section-label">Contact</p>
+    <div class="contact-grid">
+      <div>
+        <h2 class="section-title">Let's connect</h2>
+        <p class="contact-text">I'm always open to conversations about fintech, product management, and new opportunities. Feel free to reach out — I respond to every message.</p>
+        <div class="contact-links">
+          <a href="mailto:lchavarrygutierrez@colgate.edu" class="contact-link">
+            <div class="contact-link-icon">✉</div>
+            lchavarrygutierrez@colgate.edu
+          </a>
+          <a href="tel:3156302420" class="contact-link">
+            <div class="contact-link-icon">☎</div>
+            (315) 630-2420
+          </a>
+          <a href="https://linkedin.com/in/lchavarry" target="_blank" rel="noopener" class="contact-link">
+            <div class="contact-link-icon">in</div>
+            linkedin.com/in/lchavarry
+          </a>
+        </div>
+      </div>
+      <div>
+        <div style="margin-bottom: 1rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold);">Education</div>
+        <div class="edu-block">
+          <div class="edu-item">
+            <div class="edu-school">Colgate University</div>
+            <div class="edu-degree">B.A. Computer Science &amp; Economics · Aug 2022 – May 2026</div>
+            <div class="edu-detail">GPA 3.60 · Honors in CS · Phi Eta Sigma</div>
+          </div>
+          <div style="border-top: 1px solid var(--border); padding-top: 1.5rem;" class="edu-item">
+            <div class="edu-school">International Baccalaureate Diploma</div>
+            <div class="edu-degree">Grade: 44/45 · Mar 2020 – Nov 2022</div>
+            <div class="edu-detail">Valedictorian — 1st out of 150 students</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Leonardo Chavarry &nbsp;·&nbsp; Built with purpose</p>
+</footer>
+
+</body>
+</html>
